@@ -2,7 +2,10 @@
 
 import { Loading } from "@/components/auth/loading";
 import { UploadArea } from "@/components/shared/UploadArea";
+import { Choosefiles } from "@/components/shared/chooseFiles";
+import Cloudinaryupload from "@/components/shared/cloudinaryupload";
 import Inputforgrp from "@/components/shared/inputforgrp";
+import VideoPlayer from "@/components/shared/videoPlayer";
 import { api } from "@/convex/_generated/api";
 import { UserButton } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
@@ -12,7 +15,7 @@ import React, { useEffect, useState } from "react";
 const page = () => {
   const store = useMutation(api.users.store);
   const groups = useQuery(api.groups.listGroups, {});
-  const images = useQuery(api.files.list)!;
+  // const images = useQuery(api.files.list)!;
 
   useEffect(() => {
     const storeUser = async () => {
@@ -26,7 +29,7 @@ const page = () => {
     return <Loading />;
   }
 
-  console.log(images);
+  // console.log(images);
 
   return (
     <div>
@@ -38,11 +41,17 @@ const page = () => {
         })}
       </div>
 
-      <UploadArea />
+      <Cloudinaryupload />
+      <br></br>
+
+      <VideoPlayer />
+
+      {/* <UploadArea /> */}
+      {/* <Choosefiles /> */}
 
       <br></br>
 
-      {images.map((image, idx) => {
+      {/* {images.map((image, idx) => {
         return (
           <Image
             key={idx}
@@ -52,7 +61,7 @@ const page = () => {
             alt="image"
           />
         );
-      })}
+      })} */}
     </div>
   );
 };
